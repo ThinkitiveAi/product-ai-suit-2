@@ -13,56 +13,26 @@ import {
   Grid,
   Badge,
 } from "@mantine/core";
-import {
-  IconUser,
-  IconLogout,
-  IconCalendar,
-  IconUsers,
-  IconFileText,
-} from "@tabler/icons-react";
+import { IconCalendar, IconUsers, IconFileText } from "@tabler/icons-react";
 import { useAuth } from "../context/AuthContext";
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+  const { user } = useAuth();
 
   return (
     <Container size="xl" py="xl">
       <Stack gap="xl">
         {/* Header */}
         <Paper p="xl" radius="lg" withBorder>
-          <Group justify="space-between" align="center">
-            <Box>
-              <Title order={1} size="h2" c="blue.7" mb="xs">
-                Welcome back, {user?.name}!
-              </Title>
-              <Text size="sm" c="dimmed">
-                Here's what's happening with your patients today
-              </Text>
-            </Box>
-            <Group>
-              <Button
-                variant="outline"
-                leftSection={<IconUser size={16} />}
-                onClick={() => console.log("Profile clicked")}
-              >
-                Profile
-              </Button>
-              <Button
-                variant="outline"
-                color="red"
-                leftSection={<IconLogout size={16} />}
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
-            </Group>
-          </Group>
+          <Box>
+            <Title order={1} size="h2" c="blue.7" mb="xs">
+              Welcome back, {user?.name}!
+            </Title>
+            <Text size="sm" c="dimmed">
+              Here's what's happening with your patients today
+            </Text>
+          </Box>
         </Paper>
 
         {/* Stats Cards */}
@@ -105,7 +75,7 @@ const Dashboard: React.FC = () => {
                 <Box
                   style={{
                     background:
-                      "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+                      "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                     borderRadius: "50%",
                     width: 60,
                     height: 60,
@@ -120,11 +90,11 @@ const Dashboard: React.FC = () => {
                   <Text size="lg" fw={600}>
                     Active Patients
                   </Text>
-                  <Title order={2} size="h1" c="pink.7">
-                    156
+                  <Title order={2} size="h1" c="green.7">
+                    24
                   </Title>
                   <Text size="sm" c="dimmed">
-                    +12 this month
+                    +3 this week
                   </Text>
                 </Box>
               </Group>
@@ -132,12 +102,18 @@ const Dashboard: React.FC = () => {
           </Grid.Col>
 
           <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card p="xl" radius="lg" withBorder>
+            <Card
+              p="xl"
+              radius="lg"
+              withBorder
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/availability")}
+            >
               <Group>
                 <Box
                   style={{
                     background:
-                      "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+                      "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
                     borderRadius: "50%",
                     width: 60,
                     height: 60,
@@ -146,18 +122,18 @@ const Dashboard: React.FC = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <IconFileText size={24} color="white" />
+                  <IconCalendar size={24} color="white" />
                 </Box>
                 <Box>
                   <Text size="lg" fw={600}>
-                    Pending Reports
+                    Manage Availability
                   </Text>
-                  <Title order={2} size="h1" c="cyan.7">
-                    23
-                  </Title>
                   <Text size="sm" c="dimmed">
-                    -5 from last week
+                    Set schedules & block times
                   </Text>
+                  <Button variant="light" size="sm" mt="xs" color="orange">
+                    Configure
+                  </Button>
                 </Box>
               </Group>
             </Card>

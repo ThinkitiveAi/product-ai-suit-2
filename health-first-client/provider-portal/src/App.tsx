@@ -9,10 +9,13 @@ import { MantineProvider, createTheme } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AppLayout from "./components/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
+import AvailabilityPage from "./pages/AvailabilityPage";
+import AppointmentPage from "./pages/AppointmentPage";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 
@@ -76,7 +79,29 @@ function App() {
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <AppLayout>
+                    <Dashboard />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/availability"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <AvailabilityPage />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/appointments"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <AppointmentPage />
+                  </AppLayout>
                 </ProtectedRoute>
               }
             />
